@@ -79,6 +79,10 @@ declare module "nativescript-imagepicker" {
          * Set the picker mode. Supported modes: "single" or "multiple" (default).
          */
         mode?: string;
+        /**
+         * Set the picker file type. Supported modes: "image" (default) or "video".
+         */
+        type?: string;
     }
 
     export function create(options?: Options): ImagePicker;

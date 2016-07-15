@@ -216,6 +216,10 @@ export class ImagePicker {
         this._options = options;
     }
 
+    get type(): string {
+        return this._options && this._options.type && this._options.type.toLowerCase() === 'video' ? 'video' : 'image';
+    }
+
     get mode(): string {
         return this._options && this._options.mode && this._options.mode.toLowerCase() === 'single' ? 'single' : 'multiple';
     }
@@ -281,7 +285,7 @@ export class ImagePicker {
             };
 
             var intent = new Intent();
-            intent.setType("image/*");
+            intent.setType(`${this.type}/*`);
 
             // TODO: Use (<any>android).content.Intent.EXTRA_ALLOW_MULTIPLE
             if (this.mode === 'multiple') {
@@ -290,7 +294,8 @@ export class ImagePicker {
 
             intent.setAction(Intent.ACTION_GET_CONTENT);
 
-            var chooser = Intent.createChooser(intent, "Select Picture");
+            const typeMessage = this.type === 'video' ? 'Video' : 'Picture'; 
+            var chooser = Intent.createChooser(intent, `Select ${typeMessage}`);
             application.android.foregroundActivity.startActivityForResult(intent, RESULT_CODE_PICKER_IMAGES);
         });
     }

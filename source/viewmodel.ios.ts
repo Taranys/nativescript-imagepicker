@@ -74,6 +74,10 @@ export class ImagePicker extends data_observable.Observable {
         return this._options && this._options.mode && this._options.mode.toLowerCase() === 'single' ? 'single' : 'multiple';
     }
 
+    get type(): string {
+        return this._options && this._options.type && this._options.type.toLowerCase() === 'video' ? 'video' : 'image';
+    }
+
     cancel(): void {
         this.notifyCanceled();
     }
